@@ -1,0 +1,29 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Autor: GWK
+ * @Date: 2020-04-22 16:56:51
+ * @LastEditors: GWK
+ * @LastEditTime: 2020-04-23 11:32:58
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localstorage的读取</title>
+</head>
+
+<body>
+    <script>
+        let aa = JSON.stringify({
+            a: 1
+        })
+        localStorage.setItem("aaa", aa)
+        JSON.parse(localStorage.getItem("aaa"))
+        console.log(JSON.parse(localStorage.getItem("aaa")))
+    </script>
+</body>
+
+</html>
