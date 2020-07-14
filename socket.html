@@ -1,0 +1,95 @@
+<!--
+ * @Date: 2020-07-06 20:01:12
+ * @LastEditors: GWK
+ * @LastEditTime: 2020-07-13 16:55:55
+ * @FilePath: /test--demo/socket.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>document</title>
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <script>
+      function dateFormat(date) {
+        const o = {
+          y: date.getFullYear(),
+          M: date.getMonth() + 1,
+          d: date.getDate(),
+          h: date.getHours(),
+          m: date.getMinutes(),
+          s: date.getSeconds(),
+          S: date.getMilliseconds(),
+        };
+        return `${o.y}-${o.M}-${o.d} ${o.h}:${o.m}:${o.s}.${o.S}`;
+      }
+      let index = 0;
+      let ws = io("ws://10.60.129.3:30008", {
+        transports: ["websocket"],
+      });
+      ws.connect();
+      ws.on("connect", () => {
+        let arr = [];
+        for (var i = 0; i < 10000;i++) {
+          index++;
+          let content = {
+            index: index,
+            timestamp: dateFormat(new Date()),
+          };
+          content = JSON.stringify({
+            content,
+          });
+          let data = JSON.stringify({
+            guid: "g" + index,
+            env: "product",
+            appid: "1111",
+            roomid: "123456",
+            userid: "123344",
+            timestamp: new Date().getTime(),
+            report: "web",
+            message: content,
+          });
+          arr.push(data);
+        }
+        console.log(arr)
+        arr.forEach((item) => {
+          ws.emit("message", item);
+        });
+        // setInterval(() => {
+        //   index++;
+        //   let data = JSON.stringify({
+        //     guid: "1" + index,
+        //     env: "product",
+        //     appid: "1111",
+        //     roomid: "123456",
+        //     userid: "123344",
+        //     timestamp: new Date().getTime(),
+        //     report: "web",
+        //     message: "{ aaa: 111 }" + index,
+        //   });
+        //   console.log(ws.connected);
+        //   ws.emit("message", data);
+        // }, 1);
+      });
+      ws.on("connect_error", (error) => {
+        console.dir(error);
+      });
+      ws.on("connect_timeout", (error) => {
+        console.log(error);
+      });
+      ws.on("error", (error) => {
+        console.log(err);
+      });
+      ws.on("disconnect", (reason) => {
+        console.log(reason);
+      });
+      ws.on("close", () => {
+        console.log("ws close");
+      });
+      console.log(ws);
+    </script>
+  </body>
+</html>

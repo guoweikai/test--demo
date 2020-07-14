@@ -1,0 +1,23 @@
+<!--
+ * @Date: 2020-07-02 14:41:32
+ * @LastEditors: GWK
+ * @LastEditTime: 2020-07-02 14:41:59
+ * @FilePath: /test--demo/demo7.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var enumeratorPromise = navigator.mediaDevices
+        .enumerateDevices()
+        .then((deviceList) => {
+          console.log(deviceList);
+        });
+    </script>
+  </body>
+</html>
