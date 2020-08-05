@@ -1,7 +1,7 @@
 <!--
  * @Date: 2020-07-06 20:01:12
  * @LastEditors: GWK
- * @LastEditTime: 2020-07-13 16:55:55
+ * @LastEditTime: 2020-07-21 11:43:16
  * @FilePath: /test--demo/socket.html
 -->
 <!DOCTYPE html>
@@ -12,7 +12,7 @@
     <title>document</title>
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js></script>
     <script>
       function dateFormat(date) {
         const o = {
@@ -27,69 +27,92 @@
         return `${o.y}-${o.M}-${o.d} ${o.h}:${o.m}:${o.s}.${o.S}`;
       }
       let index = 0;
-      let ws = io("ws://10.60.129.3:30008", {
+      let obj = {};
+      // let url = "wss://169.62.33.10";
+      // let  url = "wss://rtc-fs.ksmobile.net"
+      // let  url ="wss://169.62.33.10"
+      // let url = "119.81.49.253:30008";
+      // let url = "wss://10.60.129.3"
+      let  url = "wss://rtc-fs.linkv.fun"
+
+      // let  url  = "10.60.129.3:"
+      let isInterval = true;
+      console.log(io);
+      let ws = io(url, {
         transports: ["websocket"],
+        reconnectionAttempts:2,
+        timeout:2000
       });
-      ws.connect();
+
+      //  connect 会触发多次
       ws.on("connect", () => {
-        let arr = [];
-        for (var i = 0; i < 10000;i++) {
-          index++;
-          let content = {
-            index: index,
-            timestamp: dateFormat(new Date()),
-          };
-          content = JSON.stringify({
-            content,
-          });
-          let data = JSON.stringify({
-            guid: "g" + index,
-            env: "product",
-            appid: "1111",
-            roomid: "123456",
-            userid: "123344",
-            timestamp: new Date().getTime(),
-            report: "web",
-            message: content,
-          });
-          arr.push(data);
+        if (isInterval) {
+          setInterval(() => {
+            index++;
+            let data = {
+              guid: "1" + index,
+              env: "product",
+              appid: "1111",
+              roomid: "123456",
+              userid: "123344",
+              timestamp: new Date().getTime(),
+              report: "web",
+              message: "{ aaa: 111 }" + index,
+            };
+            let guid = data.guid;
+
+            obj[guid] = data;
+            data = JSON.stringify(data);
+            ws.emit("message", data);
+            console.log(obj);
+          }, 1000);
+          isInterval = false;
         }
-        console.log(arr)
-        arr.forEach((item) => {
-          ws.emit("message", item);
-        });
-        // setInterval(() => {
-        //   index++;
-        //   let data = JSON.stringify({
-        //     guid: "1" + index,
-        //     env: "product",
-        //     appid: "1111",
-        //     roomid: "123456",
-        //     userid: "123344",
-        //     timestamp: new Date().getTime(),
-        //     report: "web",
-        //     message: "{ aaa: 111 }" + index,
-        //   });
-        //   console.log(ws.connected);
-        //   ws.emit("message", data);
-        // }, 1);
       });
+
       ws.on("connect_error", (error) => {
-        console.dir(error);
+        // 连接报错
+        console.log("connect_error", error);
       });
       ws.on("connect_timeout", (error) => {
-        console.log(error);
+        // 连接超时
+        console.log("connect_timeout", error);
       });
       ws.on("error", (error) => {
-        console.log(err);
+        // 连接error
+        console.log("error", err);
       });
       ws.on("disconnect", (reason) => {
-        console.log(reason);
+        // 连接断开
+        console.log("disconnect", reason);
       });
-      ws.on("close", () => {
-        console.log("ws close");
+      ws.on("close", (e) => {
+        console.log("ws close", e);
       });
-      console.log(ws);
+      ws.on("reply", (e) => {
+        let guid = e.guid;
+        delete obj[guid];
+        console.log(obj);
+      });
+      ws.on("reconnect", (e) => {
+        for (const key in obj) {
+          let data = JSON.stringify(obj[key]);
+          ws.emit("message", data);
+        }
+        console.log("reconnect", e);
+      });
+      ws.on("reconnect_attempt", (e) => {
+        console.log("reconnect_attempt", e);
+      });
+      ws.on("reconnecting", (e) => {
+        console.log("reconnecting", e);
+      });
+      ws.on("reconnect_error", (e) => {
+        console.log("reconnect_error", e);
+      });
+      ws.on("reconnect_failed", (e) => {
+        console.log("reconnect_failed", e);
+      });
     </script>
   </body>
 </html>
