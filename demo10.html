@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script>
+            var memory = new WebAssembly.Memory({initial:100, maximum:100});
+            let data = {
+                begin_time: "2020-10-25 10:47:25",
+                end_time: "2020-10-26 10:47:25",
+                channel_id: "1069348354-16036242682529246044",
+                user_id: "1069348354-1280375705632382977",
+                env: "liveme_online",
+            };
+
+            data = JSON.stringify(data);
+            $.ajax({
+                timeout : 100000,
+                url:"http://100.24.137.15:9009/v1/crystalball/channel/flowto/view",
+                headers: { "Content-Type": "application/json;xcharset=uft8" },
+                data: data,
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                   // data = jQuery.parseJSON(data); //dataType指明了返回数据为json类型，故不需要再反序列化x
+                    console.log(data);
+                },
+            });
+        </script>
+    </body>
+</html>

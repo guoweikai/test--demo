@@ -1,0 +1,74 @@
+
+[
+    "joinSuccess",
+    {
+        "code":200,
+        "timestamp":1599121837677,
+        "room_id":"5291372290-M15991217238590149285",
+        "user_id":"5291372290-c3a31451f298bf4f25f9196f36ea782c",
+        "connect_state":0,
+        "participants":[
+            {
+                "session_id":"",
+                "user_id":"5291372290-H5bb7c09c8f553840b48976a8ad96ff9a",
+                "role":2,
+                "show":"",
+                "edge_id":"169.56.141.109_b",
+                "stream_id":"s-5291372290-M15991217238590149285-H5bb7c09c8f553840b48976a8ad96ff9a-1599121726848",
+                "pull_urls":[
+                    "http://ter.ocsgllive.ksmobile.net/yolo/s-5291372290-M15991217238590149285-H5bb7c09c8f553840b48976a8ad96ff9a-1599121726848.flv"
+                ],
+                "room_id":"5291372290-M15991217238590149285",
+                "host":1
+            }
+        ],
+        "add_peer_cost":169,
+        "center_cost":3,
+        "bitrate":0,
+        "config":{
+            "texture":0,
+            "hard_coding":1,
+            "hard_decoding":0,
+            "peer_leave_net_fault_timeout":90,
+            "disabled_ip_detect":1,
+            "video_degradation_preference":-1,
+            "detect_domain":"www.baidu.com",
+            "is_persistent_connection":1,
+            "auto_resolution":{
+                "aspect_ratios":{
+                    "aspect_ratio":0.5625,
+                    "min_adapt_down_interval":2000,
+                    "min_adapt_up_interval":15000,
+                    "resolutions":[
+                        {
+                            "min_resolution_side":720,
+                            "min_bitrate":1200
+                        },
+                        {
+                            "min_bitrate":800,
+                            "min_resolution_side":540
+                        },
+                        {
+                            "min_bitrate":500,
+                            "min_resolution_side":360
+                        }
+                    ]
+                },
+                "enabled":1
+            },
+            "host_exit_close_room":0,
+            "flexfec":{
+                "flexfec_upper_maxframes":6,
+                "flexfec_low_rtt_nack_ms":20,
+                "flexfec_high_rtt_nack_ms":1000,
+                "flexfec_boost_rate_key":2,
+                "flexfec_enable":false
+            },
+            "use_xlogger_system":false,
+            "ntp_service_enable":true
+        }
+    }
+]
+
+
+
