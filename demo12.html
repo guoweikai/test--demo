@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const obj = {
+                global: {
+                    cdnCenter: {
+                        America: {
+                            Country_AA: {
+                                City_AA: {
+                                    wdc01: {
+                                        node_id: 1,
+                                        node_name: "naode02",
+                                        metadata: "test",
+                                        wanip: "169.1.1.1",
+                                        lanip: "10.1.1.1",
+                                        cloud: "ibm",
+                                        create_time: "2020-11-19 10:51:59",
+                                        update_time: "2020-11-19 10:51:59",
+                                    },
+                                },
+                            },
+                        },
+                        Europe: {
+                            Country_BB: {
+                                City_BB: {
+                                    de01: {
+                                        node_id: 2,
+                                        node_name: "naode03",
+                                        metadata: "test-1",
+                                        wanip: "169.2.2.2",
+                                        lanip: "10.2.2.2",
+                                        cloud: "ibm",
+                                        create_time: "2020-11-19 10:51:59",
+                                        update_time: "2020-11-19 10:51:59",
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            };
+
+            function transform(object) {
+                return Object.entries(object).map(([key, value]) =>
+                    Object.assign(
+                        { key },
+                        value && typeof value === "object"
+                            ? { value: "", children: transform(value) }
+                            : { value, children: [] }
+                    )
+                );
+            }
+            result = transform(obj);
+
+            console.log(result);
+        </script>
+    </body>
+</html>

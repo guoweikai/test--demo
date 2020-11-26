@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>数组对象遍历前几位</title>
+    </head>
+    <body>
+        <script>
+            const data = [
+                {
+                    value: "test",
+                    children: [
+                        {
+                            value: "CdnCenter",
+                            children: [
+                                {
+                                    value: "America",
+                                    children: [
+                                        {
+                                            value: "US",
+                                            children: [
+                                                {
+                                                    value: "wdc",
+                                                    children: [
+                                                        {
+                                                            value: "wdc04",
+                                                            children: [
+                                                                {
+                                                                    node_id: 1,
+                                                                    node_name:
+                                                                        "naode01",
+                                                                    metadata:
+                                                                        "test",
+                                                                    wanip:
+                                                                        "169.1.1.1",
+                                                                    lanip:
+                                                                        "10.1.1.1",
+                                                                    cloud:
+                                                                        "ibm",
+                                                                    create_time:
+                                                                        "2020-11-23 11:53:07",
+                                                                    update_time:
+                                                                        "2020-11-24 03:02:28",
+                                                                },
+                                                            ],
+                                                        },
+                                                    ],
+                                                },
+                                            ],
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ];
+            function getNewdata(data, key) {
+                let newIndex = 0;
+                function func(data) {
+                    newIndex++;
+                    for (let index = 0; index < data.length; index++) {
+                        if (newIndex < key) {
+                            func(data[index].children);
+                        } else {
+                            // 删除 children
+                            delete data[index].children;
+                        }
+                    }
+                }
+                func(data);
+            }
+            getNewdata(data,3);
+            console.log(data)
+        </script>
+    </body>
+</html>

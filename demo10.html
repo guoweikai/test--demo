@@ -20,16 +20,17 @@
             data = JSON.stringify(data);
             $.ajax({
                 timeout : 100000,
-                url:"http://100.24.137.15:9009/v1/crystalball/channel/flowto/view",
+                url:"http://127.0.0.1:8888",
                 headers: { "Content-Type": "application/json;xcharset=uft8" },
                 data: data,
-                type: "POST",
+                type: "GET",
                 dataType: "json",
                 success: function (data) {
                    // data = jQuery.parseJSON(data); //dataType指明了返回数据为json类型，故不需要再反序列化x
                     console.log(data);
                 },
             });
+            
         </script>
     </body>
 </html>
