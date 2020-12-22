@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>将本地时间转换为 utc 时间 </title>
+</head>
+
+<body>
+
+    <a href="http://monitor_online.linkv.sg/user/login/">调转</a>
+    <script src='./moment.js'></script>
+    <script>
+        let  aa= moment().valueOf()
+        console.log(aa)
+        let bb= moment().utc().format('YYYY-MM-DD HH:mm:ss')
+        // console.log(moment(aa).unix())
+        // console.log(moment().unix())
+       console.log(bb)
+    </script>
+</body>
+
+</html>

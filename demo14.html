@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 700px;
+            height: 500px;
+            border: 1px solid red
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://www.liveme.com/app/js/dist/video-player-v3.1.4-beta.js"></script>
+    <button id="button">
+        打开
+    </button>
+    <script>
+        var VideoPlayer = window["video-player"].VideoPlayer;
+        lastSource = 'http://record.linkv.fun/oc/yolo-16069946327261592743--20201203112713.m3u8'
+        // player.open({ isPrimary: true, identifier: 0, url: 'http://record.linkv.fun/oc/yolo-16069946327261592743--20201203112713.m3u8' });
+
+        var player = new VideoPlayer();
+        player.open({ url: 'http://record.linkv.fun/oc/yolo-16069946327261592743--20201203112713.m3u8', isPrimary: true, identifier: 0 });
+
+        function refreshSource() {
+
+        }
+        player.addEventListener("refresh", refreshSource);
+        player.appendIntoContainer(document.body);
+        // player.open({ isPrimary: true, identifier: 0, url: 'http://qa-record.linkv.fun/luzx/test.flv' })
+        document.getElementById("button").addEventListener("click", () => {
+            player.open({ isPrimary: true, identifier: 0, url: 'http://qa-record.linkv.fun/luzx/test.flv' })
+        })
+    </script>
+
+
+</body>
+
+</html>

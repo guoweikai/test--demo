@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style type="text/css">
+            #div1 {
+                width: 700px;
+
+                height: 120px;
+
+                padding: 10px;
+
+                border: 1px solid #aaaaaa;
+            }
+
+            #drag1 {
+                cursor: pointer;
+            }
+            #div2 {
+                width: 100px;
+                height: 100px;
+                border: 1px solid red;
+                display: inline-block;
+            }
+        </style>
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+            // 拖
+            function drag(ev) {
+                console.log(ev);
+                console.log(ev.target.innerText);
+                ev.dataTransfer.setData("Text", ev.target.innerText);
+            }
+            // 放
+            function drop(ev) {
+                ev.preventDefault();
+
+                var data = ev.dataTransfer.getData("Text");
+                console.log(data);
+                // var item = document.getElementById(data).cloneNode();
+
+                ev.target.appendChild(item);
+            }
+        </script>
+    </head>
+    <body>
+        <p>请把 Windows Azure 的图片拖放到矩形中：</p>
+
+        <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+        <br />
+
+        <br />
+
+        <br />
+
+        <br />
+
+        <br />
+
+        <!-- <img
+            id="drag1"
+            src="./aaa.jpeg"
+           
+        /> -->
+
+        <div
+            id="div2"
+            draggable="true"
+            ondragstart="drag(event)"
+            draggable="true"
+        >
+            aaa
+        </div>
+    </body>
+</html>
